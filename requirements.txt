@@ -1,0 +1,8 @@
+pyrotgfork
+apscheduler
+cachetools
+sqlalchemy
+tgcrypto
+python-dotenv
+pytz
+hebcal-api
