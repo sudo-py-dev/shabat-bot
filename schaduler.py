@@ -7,7 +7,9 @@ import asyncio
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from tools import status_lock, IST
 from enums import Messages, full_lock
+import os
 
+BEFORE_SHABAT = os.getenv("BEFORE_SHABAT", 40)
 
 async def _process_shabat_groups(client: Client, groups: list[dict], is_locking: bool, holiday_name: str | None = None):
     """
@@ -93,7 +95,7 @@ async def shabat_scheduler(client: Client):
     if status[0] is None or len(status) < 3:
         return
     elif status[0] is True:
-        times_lock = status[1] - datetime.timedelta(minutes=40)
+        times_lock = status[1] - datetime.timedelta(minutes=BEFORE_SHABAT)
         scheduler.add_job(lock_shabat, trigger='cron', args=[client, status[2]], hour=times_lock.hour, minute=times_lock.minute, timezone=IST)
         logger.info("shabat scheduled to {}".format(times_lock.strftime('%H:%M')))
     elif status[0] is False:

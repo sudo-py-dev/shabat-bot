@@ -35,7 +35,6 @@
    ```
 
 3. **התקנת ספריות תלות**
-   ```bash
    pip install -r requirements.txt
    ```
 
@@ -49,13 +48,12 @@
    API_ID=your_api_id
    API_HASH=your_api_hash
    BOT_TOKEN=your_bot_token
+   BEFORE_SHABAT=40
    ```
 
 5. **הרצת הבוט**
    ```bash
    python index.py
-   ```
-
 ## 📖 שימוש
 
 ### למנהלי קבוצות
@@ -101,6 +99,7 @@
 | `API_ID` | מזהה API של טלגרם | כן |
 | `API_HASH` | Hash של API טלגרם | כן |
 | `BOT_TOKEN` | אסימון בוט טלגרם | כן |
+| `BEFORE_SHABAT` | מספר דקות לפני כניסת השבת לנעילת הקבוצות (ברירת מחדל: 40) | לא |
 
 ### איך זה עובד
 
