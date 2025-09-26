@@ -35,6 +35,7 @@
    ```
 
 3. **התקנת ספריות תלות**
+   ```bash
    pip install -r requirements.txt
    ```
 
@@ -54,6 +55,7 @@
 5. **הרצת הבוט**
    ```bash
    python index.py
+   ```
 ## 📖 שימוש
 
 ### למנהלי קבוצות
