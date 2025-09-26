@@ -16,9 +16,9 @@
 
 ### דרישות מוקדמות
 
-- Python 3.8 או גבוה יותר
+- Python 3.8 או יותר
 - אסימון בוט טלגרם (קבל מאת [@BotFather](https://t.me/botfather))
-- פרטי API של טלגרם (API ID ו-API Hash)
+- פרטי API של טלגרם [API ID + API Hash](https://my.telegram.org/auth)
 
 ### התקנה
 
