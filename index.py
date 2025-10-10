@@ -20,7 +20,7 @@ load_dotenv()
 api_id = os.getenv("API_ID")
 api_hash = os.getenv("API_HASH")
 token = os.getenv("BOT_TOKEN")
-bot_client_name = os.getenv("BOT_CLIENT_NAME")
+bot_client_name = os.getenv("BOT_CLIENT_NAME", "bot")
 bot_owner_id = os.getenv("BOT_OWNER_ID")
 skip_updates = os.getenv("SKIP_UPDATES", False)
 
