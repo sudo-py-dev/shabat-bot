@@ -1,6 +1,6 @@
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from tools.enums import Messages
-from tools.database import BotSettings
+from database import BotSettings
 
 
 def select_language_buttons():

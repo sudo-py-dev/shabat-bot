@@ -4,7 +4,7 @@ from tools.tools import with_language, owner_only
 from tools.inline_keyboards import bot_settings_buttons
 from tools.enums import Messages
 from pyrogram.handlers import MessageHandler
-from tools.database import BotSettings
+from database import BotSettings
 
 
 @owner_only

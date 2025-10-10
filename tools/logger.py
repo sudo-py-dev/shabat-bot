@@ -13,7 +13,7 @@ import logging
 import os
 import sys
 from datetime import datetime
-from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
+from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 from typing import Any, ClassVar, Dict, Optional, Union
 
@@ -236,25 +236,3 @@ logger = setup_logger()
 
 # Add some useful aliases
 log = logger
-
-# Example usage:
-if __name__ == "__main__":
-    # Basic logging
-    logger.debug("Debug message")
-    logger.info("Info message")
-    logger.warning("Warning message")
-    logger.error("Error message")
-    logger.critical("Critical message")
-    logger.success("Operation completed successfully")
-    
-    # With context
-    logger.info("Processing request", extra={"context": {"user_id": 123, "action": "login"}})
-    
-    # Using with_context
-    ctx_logger = logger.with_context(user_id=123, request_id="abc123")
-    ctx_logger.info("Request processed")
-    
-    # Performance logging
-    start = time.time()
-    # ... some operation ...
-    logger.log_performance("Database query", start, query="SELECT * FROM users")

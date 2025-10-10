@@ -5,7 +5,7 @@ from pathlib import Path
 from pyrogram import filters
 from pyrogram.handlers import CallbackQueryHandler
 from pyrogram.types import CallbackQuery
-from tools.database import Users, Chats, BotSettings
+from database import Users, Chats, BotSettings
 from tools.tools import with_language, owner_only
 from tools.inline_keyboards import bot_settings_buttons, buttons_builder
 from tools.logger import logger

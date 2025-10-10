@@ -1,5 +1,5 @@
 from pyrogram.types import CallbackQuery
-from tools.database import Users
+from database import Users
 from tools.enums import Messages
 from pyrogram.handlers import CallbackQueryHandler
 from pyrogram import filters

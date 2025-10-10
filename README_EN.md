@@ -99,7 +99,7 @@ telegram-bot-template/
 ### Database Operations
 
 ```python
-from tools.database import Users
+from database import Users
 
 # Create user
 Users.create(user_id=123456789, username="user",full_name="user", language="en", is_active=True)

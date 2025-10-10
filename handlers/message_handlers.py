@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.handlers import MessageHandler
 from pyrogram.types import Message
 from pyrogram.enums import MessageServiceType
-from tools.database import Chats
+from database import Chats
 
 
 async def service_message_handler(client: Client, message: Message):

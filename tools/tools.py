@@ -3,7 +3,7 @@ from pyrogram import Client
 from pyrogram.enums import ChatMembersFilter, ChatType
 from pyrogram.types import CallbackQuery, Message
 from pyrogram.errors import ChatIdInvalid, ChatAdminRequired, ChannelPrivate, PeerIdInvalid
-from tools.database import Chats, Users, AdminsPermissions, BotSettings
+from database import Chats, Users, AdminsPermissions, BotSettings
 from tools.enums import AccessPermission
 from tools.enums import Messages, PrivilegesMessages
 from functools import wraps
@@ -228,6 +228,8 @@ def register_handlers(app: Client, *handler_lists: list) -> None:
     """
     count_handlers = 0
     for handler_list in handler_lists:
+        if not isinstance(handler_list, list):
+            raise ValueError("All handler lists must be of type list")
         for handler in handler_list:
             app.add_handler(handler)
             count_handlers += 1

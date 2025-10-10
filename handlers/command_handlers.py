@@ -6,7 +6,7 @@ from pyrogram.enums import ChatType
 from pyrogram.handlers import MessageHandler
 from pyrogram import filters
 from tools.tools import with_language, is_admin_message
-from tools.database import Chats
+from database import Chats
 
 
 @with_language

@@ -291,7 +291,7 @@ async def admin_command(client, message, language: str):
 ### ניהול הגדרות בוט
 
 ```python
-from tools.database import BotSettings
+from database import BotSettings
 
 # קבלת הגדרות
 settings = BotSettings.get_settings()
@@ -307,7 +307,7 @@ BotSettings.update_settings(
 ### פעולות מסד נתונים
 
 ```python
-from tools.database import Users, Chats
+from database import Users, Chats
 
 # צור משתמש
 Users.create(user_id=123456789, username="user", language="en")
