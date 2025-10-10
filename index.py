@@ -11,8 +11,7 @@ from handlers import (
     join_handlers,
     message_handlers
 )
-from bot import bot_handlers
-from bot import bot_callback_handlers
+from bot import settings_handlers, settings_callback_handlers
 
 
 load_dotenv()
@@ -37,8 +36,8 @@ register_handlers(
     app,
     commands_handlers,
     callback_query_handlers,
-    bot_handlers,
-    bot_callback_handlers,
+    settings_handlers,
+    settings_callback_handlers,
     join_handlers,
     message_handlers
     # add list of handler see example https://github.com/sudo-py-dev/telegram-bot-template/blob/main/handlers/join_handlers.py#L64

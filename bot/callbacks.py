@@ -1,16 +1,13 @@
 import json
 import tempfile
 from datetime import datetime
-from pathlib import Path
 from pyrogram import filters
 from pyrogram.handlers import CallbackQueryHandler
 from pyrogram.types import CallbackQuery
 from database import Users, Chats, BotSettings
 from tools.tools import with_language, owner_only
 from tools.inline_keyboards import bot_settings_buttons, buttons_builder
-from tools.logger import logger
 from tools.enums import Messages
-from typing import Dict, Any, List
 
 
 def _serialize_value(value):
@@ -28,7 +25,7 @@ def _serialize_value(value):
 
 @owner_only
 @with_language
-async def handle_bot_callbacks(_, query: CallbackQuery, language: str):
+async def on_callback_settings(_, query: CallbackQuery, language: str):
     """Handle all bot-related callback queries.
     
     Args:
@@ -60,7 +57,7 @@ async def handle_bot_callbacks(_, query: CallbackQuery, language: str):
         )
 
     elif action in ("users", "chats"):
-        await _handle_export(query, messages, action)
+        await _export_data(query, messages, action)
 
     elif action in ("can_join_group", "can_join_channel", "back"):
         if action != "back":
@@ -71,7 +68,7 @@ async def handle_bot_callbacks(_, query: CallbackQuery, language: str):
         )
 
 
-async def _handle_export(query: CallbackQuery, messages: Messages, data_type: str) -> None:
+async def _export_data(query: CallbackQuery, messages: Messages, data_type: str) -> None:
     """Export all users or chats as JSON and send as a document."""
     model = Users() if data_type == "users" else Chats()
     items = await model.get_all()
@@ -94,9 +91,9 @@ async def _handle_export(query: CallbackQuery, messages: Messages, data_type: st
 
 
 
-bot_callback_handlers = [
+settings_callback_handlers = [
     CallbackQueryHandler(
-        handle_bot_callbacks,
+        on_callback_settings,
         filters.regex(r"^bot:(\w+)$")
     )
 ]

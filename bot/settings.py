@@ -16,4 +16,4 @@ async def bot_settings(_, message: Message, language: str):
     await message.reply(messages.bot_settings, reply_markup=buttons)
 
 
-bot_handlers = [MessageHandler(bot_settings, filters.command("admin"))]
+settings_handlers = [MessageHandler(bot_settings, filters.command("admin"))]
