@@ -142,7 +142,8 @@ def with_language(func):
                              chat_type=chat_type,
                              chat_title=msg.chat.title)
                 chat = await Chats.get(chat_id=chat_id)
-            if chat.get("is_banned"):
+            if isinstance(chat, dict) and chat.get("is_banned"):
+                await msg.chat.leave()
                 return
             language = chat.get("language") or default_language
         elif chat_type == ChatType.PRIVATE:
@@ -157,7 +158,7 @@ def with_language(func):
                 await msg.reply(Messages(language=default_language).select_language,
                                 reply_markup=select_language_buttons())
                 return
-            if user.get("is_banned"):
+            if isinstance(user, dict) and user.get("is_banned"):
                 return
             language = user.get("language") or default_language
         else:
