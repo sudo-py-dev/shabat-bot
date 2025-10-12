@@ -11,10 +11,10 @@ from tools.logger import logger
 from typing import Union
 import os
 from tools.inline_keyboards import select_language_buttons
-
+from pyrogram.filters import create, Filter
 
 def is_valid_chat_id(chat_id) -> bool:
-    return bool(re.match(r"^-?\d{5,32}$", str(chat_id)))
+    return bool(re.match(r"^-\d{5,32}$", str(chat_id)))
 
 
 def is_valid_user_id(user_id) -> bool:
@@ -142,8 +142,9 @@ def with_language(func):
                              chat_type=chat_type,
                              chat_title=msg.chat.title)
                 chat = await Chats.get(chat_id=chat_id)
+            if chat.get("is_banned"):
+                return
             language = chat.get("language") or default_language
-
         elif chat_type == ChatType.PRIVATE:
             user_id = msg.from_user.id
             user = await Users.get(user_id=user_id)
@@ -155,6 +156,8 @@ def with_language(func):
                 user = await Users.get(user_id=user_id)
                 await msg.reply(Messages(language=default_language).select_language,
                                 reply_markup=select_language_buttons())
+                return
+            if user.get("is_banned"):
                 return
             language = user.get("language") or default_language
         else:
@@ -234,3 +237,15 @@ def register_handlers(app: Client, *handler_lists: list) -> None:
             app.add_handler(handler)
             count_handlers += 1
     logger.info(f"Registered {count_handlers} handlers")
+
+
+def wait_input_filter(wait_input: str) -> Filter:
+    """Filter to check if the bot is waiting for input from the user"""
+    async def func(_, __, m: Message) -> bool:
+        if m.chat.type == ChatType.PRIVATE:
+            user = await Users().get(m.from_user.id)
+            if not user:
+                return False
+            return user.get("wait_input") == wait_input
+        return False
+    return create(func=func, name=f"WaitInput_{wait_input}")

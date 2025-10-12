@@ -38,6 +38,8 @@ class Chats(Base):
     chat_title = Column(String, nullable=True)
     language = Column(String, nullable=True)
     is_active = Column(Boolean, default=True)
+    is_banned = Column(Boolean, default=False)
+    # is the bot admin of the chat
     is_admin = Column(Boolean, default=False)
 
     # Control update of admins permissions
@@ -286,8 +288,12 @@ class Users(Base):
     full_name = Column(String, nullable=True)
     language = Column(String, nullable=True)
     is_active = Column(Boolean, default=True)
+    is_banned = Column(Boolean, default=False)
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
+    
+    # wait_input is used to wait for user input
+    wait_input = Column(String, nullable=True)
     # Add more columns as needed
 
     @staticmethod
@@ -320,7 +326,7 @@ class Users(Base):
             return user.__dict__
 
     @staticmethod
-    async def update(user_id: int, **kwargs) -> bool:
+    async def update(user_id: int, **kwargs) -> Optional[Dict[str, Any]]:
         async with async_session() as session:
             user = await session.execute(select(Users).filter_by(user_id=user_id))
             user = user.scalars().first()
@@ -329,7 +335,8 @@ class Users(Base):
             for key, value in kwargs.items():
                 setattr(user, key, value)
             await session.commit()
-            return True
+            await session.refresh(user)
+            return user.__dict__
 
     @staticmethod
     async def delete(user_id: int) -> bool:

@@ -29,7 +29,23 @@
         "no_data_to_export": "ℹ️ אין נתונים לייצוא.",
         "exporting_data": "מייצא נתונים נא להמתין...",
         "unauthorized_user": "משתמש לא מורשה",
-        "error_occurred": "שגיאה קיימת אנא נסה שוב מאוחר יותר"
+        "error_occurred": "שגיאה קיימת אנא נסה שוב מאוחר יותר",
+        "send_banid": "✍️ אנא שלח את מזהה המשתמש או הקבוצה שברצונך לחסום\n או שלח /cancel לחזרה",
+        "send_unbanid": "✍️ אנא שלח את מזהה המשתמש או הקבוצה שברצונך לשחרר\n או שלח /cancel לחזרה",
+        "banid_button": "🚫 חסימת משתמש או קבוצה",
+        "banid_success": "✅ המשתמש/קבוצה נחסם בהצלחה",
+        "banid_chat_not_found": "❌ לא נמצאה קבוצה עם המזהה שצוין",
+        "banid_user_not_found": "❌ לא נמצא משתמש עם המזהה שצוין",
+        "banid_invalid": "❌ מזהה לא תקין. אנא שלח מזהה משתמש או קבוצה תקין",
+        "banid_chat_already_banned": "❌ הקבוצה כבר נחסמה",
+        "banid_user_already_banned": "❌ המשתמש כבר נחסם",
+        "unbanid_button": "✅ שחרור משתמש או קבוצה",
+        "unbanid_success": "✅ המשתמש/קבוצה שוחרר בהצלחה",
+        "unbanid_chat_not_found": "❌ לא נמצאה קבוצה עם המזהה שצוין",
+        "unbanid_user_not_found": "❌ לא נמצא משתמש עם המזהה שצוין",
+        "unbanid_invalid": "❌ מזהה לא תקין. אנא שלח מזהה משתמש או קבוצה תקין",
+        "unbanid_chat_not_banned": "❌ הקבוצה כבר שוחררה",
+        "unbanid_user_not_banned": "❌ המשתמש כבר שוחרר"
     },
 
     "en": {
@@ -62,7 +78,22 @@
         "no_data_to_export": "ℹ️ No data available to export.",
         "exporting_data": "Exporting data please wait...",
         "unauthorized_user": "unauthorized user",
-        "error_occurred": "an error occurred"
+        "error_occurred": "an error occurred",
+        "send_banid": "✍️ Please send the user ID or chat ID you want to ban\n or send /cancel",
+        "send_unbanid": "✍️ Please send the user ID or chat ID you want to unban\n or send /cancel",
+        "banid_button": "🚫 Ban ID",
+        "banid_success": "✅ User/chat has been banned successfully",
+        "banid_chat_not_found": "❌ No chat found with the specified ID",
+        "banid_user_not_found": "❌ No user found with the specified ID",
+        "banid_invalid": "❌ Invalid ID. Please provide a valid user or chat ID",
+        "banid_chat_already_banned": "❌ The chat is already banned",
+        "banid_user_already_banned": "❌ The user is already banned",
+        "unbanid_success": "✅ User/chat has been banned successfully",
+        "unbanid_chat_not_found": "❌ No chat found with the specified ID",
+        "unbanid_user_not_found": "❌ No user found with the specified ID",
+        "unbanid_invalid": "❌ Invalid ID. Please provide a valid user or chat ID",
+        "unbanid_chat_not_banned": "❌ The chat is already banned",
+        "unbanid_user_not_banned": "❌ The user is already banned"
     },
 
     "fr": {
@@ -95,6 +126,22 @@
         "no_data_to_export": "ℹ️ Aucune donnée à exporter.",
         "exporting_data": "Exportation des données en cours, veuillez patienter...",
         "unauthorized_user": "utilisateur non autorisé",
-        "error_occurred": "une erreur est survenue"
+        "error_occurred": "une erreur est survenue",
+        "send_banid": "✍️ Veuillez envoyer l'ID de l'utilisateur ou du chat à bannir \nou envoyer /cancel",
+        "send_unbanid": "✍️ Veuillez envoyer l'ID de l'utilisateur ou du chat à débannir \nou envoyer /cancel",
+        "banid_button": "🚫 Bannir un ID",
+        "banid_success": "✅ L'utilisateur/chat a été banni avec succès",
+        "banid_chat_not_found": "❌ Aucun chat trouvé avec l'ID spécifié",
+        "banid_user_not_found": "❌ Aucun utilisateur trouvé avec l'ID spécifié",
+        "banid_invalid": "❌ ID invalide. Veuillez fournir un ID d'utilisateur ou de chat valide",
+        "banid_chat_already_banned": "❌ Le chat est déjà banni",
+        "banid_user_already_banned": "❌ L'utilisateur est déjà banni",
+        "unbanid_button": "🚫 Débannir un ID",
+        "unbanid_success": "✅ L'utilisateur/chat a été débanni avec succès",
+        "unbanid_chat_not_found": "❌ Aucun chat trouvé avec l'ID spécifié",
+        "unbanid_user_not_found": "❌ Aucun utilisateur trouvé avec l'ID spécifié",
+        "unbanid_invalid": "❌ ID invalide. Veuillez fournir un ID d'utilisateur ou de chat valide",
+        "unbanid_chat_not_banned": "❌ Le chat est déjà débanni",
+        "unbanid_user_not_banned": "❌ L'utilisateur est déjà débanni"
     }
 }

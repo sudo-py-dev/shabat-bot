@@ -35,25 +35,34 @@ def buttons_builder(name, data):
 
 def bot_settings_buttons(bot_settings: BotSettings, language: str):
     messages = Messages(language=language)
-    buttons = []
-    row = []
-    # Define button configurations
-    can_join_group = "✅" if bot_settings.can_join_group else "❌"
-    can_join_channel = "✅" if bot_settings.can_join_channel else "❌"
-
-    config_buttons = [
-        (messages.statistics_button, "bot:statistics"),
-        (messages.can_join_group_button.format(can_join_group), "bot:can_join_group"),
-        (messages.can_join_channel_button.format(can_join_channel), "bot:can_join_channel"),
-        (messages.export_users_button, "bot:users"),
-        (messages.export_chats_button, "bot:chats")
+    
+    buttons = [
+        # Statistics on its own row
+        [InlineKeyboardButton(text=messages.statistics_button, callback_data="bot:statistics")],
+        
+        # Group settings
+        [
+            InlineKeyboardButton(
+                text=messages.can_join_group_button.format("✅" if bot_settings.can_join_group else "❌"),
+                callback_data="bot:can_join_group"
+            ),
+            InlineKeyboardButton(
+                text=messages.can_join_channel_button.format("✅" if bot_settings.can_join_channel else "❌"),
+                callback_data="bot:can_join_channel"
+            )
+        ],
+        
+        # Export buttons
+        [
+            InlineKeyboardButton(text=messages.export_users_button, callback_data="bot:users"),
+            InlineKeyboardButton(text=messages.export_chats_button, callback_data="bot:chats")
+        ],
+        
+        # Ban/Unban actions
+        [
+            InlineKeyboardButton(text=messages.banid_button, callback_data="bot:banid"),
+            InlineKeyboardButton(text=messages.unbanid_button, callback_data="bot:unbanid")
+        ]
     ]
-
-    for button_name, callback_data in config_buttons:
-        row.append(InlineKeyboardButton(button_name, callback_data=callback_data))
-        if len(row) == 2:
-            buttons.append(row)
-            row = []
-    if row:
-        buttons.append(row)
+    
     return InlineKeyboardMarkup(buttons)

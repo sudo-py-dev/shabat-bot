@@ -3,7 +3,7 @@ import tempfile
 from datetime import datetime
 from pyrogram import filters
 from pyrogram.handlers import CallbackQueryHandler
-from pyrogram.types import CallbackQuery
+from pyrogram.types import CallbackQuery, KeyboardButton
 from database import Users, Chats, BotSettings
 from tools.tools import with_language, owner_only
 from tools.inline_keyboards import bot_settings_buttons, buttons_builder
@@ -66,6 +66,13 @@ async def on_callback_settings(_, query: CallbackQuery, language: str):
             messages.bot_settings,
             reply_markup=bot_settings_buttons(await BotSettings.get_settings(), language)
         )
+    elif action == "banid":
+        await Users.update(user_id=query.from_user.id, wait_input="banid")
+        await query.edit_message_text(messages.send_banid)
+    elif action == "unbanid":
+        await Users.update(user_id=query.from_user.id, wait_input="unbanid")
+        await query.edit_message_text(messages.send_unbanid)
+        
 
 
 async def _export_data(query: CallbackQuery, messages: Messages, data_type: str) -> None:

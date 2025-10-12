@@ -15,4 +15,5 @@ async def service_message_handler(client: Client, message: Message):
                      chat_title=new_title)
 
 
+
 message_handlers = [MessageHandler(service_message_handler, filters.service)]
