@@ -13,7 +13,7 @@
         "select_language": "🌐 <b>בחירת שפה</b>\nבחר את השפה המועדפת עליך לשימוש בבוט.\n\n<i>Select your preferred language below.</i>",
         "select_language_groups": "🌍 אנא בחר שפה עבור קבוצה זו.\nהשפות הנתמכות הן: {}",
         "language_set": "✅ <b>השפה שהוגדרה עבורך היא:</b> {}",
-        "language_set_groups": "✅ <b>השפה שהוגדרה עבור הקבוצה היא:</b> {}",
+        "language_set_groups": "✅ <b>השפה שהוגדרה עבור הקבוצה היא:</b> עברית",
         "language_not_supported": "⚠️ השפה {} אינה נתמכת.\nהשפות הנתמכות הן: {}",
         "adminonly": "🚫 פקודה זו זמינה למנהלים בלבד",
         "statistics": "📊 <b>סטטיסטיקות בוט</b>\n👥 משתמשים רשומים: {}\n✅ משתמשים פעילים: {}\n💬 צ׳אטים כוללים: {}\n⚡ צ׳אטים פעילים: {}",
@@ -45,7 +45,17 @@
         "unbanid_user_not_found": "❌ לא נמצא משתמש עם המזהה שצוין",
         "unbanid_invalid": "❌ מזהה לא תקין. אנא שלח מזהה משתמש או קבוצה תקין",
         "unbanid_chat_not_banned": "❌ הקבוצה כבר שוחררה",
-        "unbanid_user_not_banned": "❌ המשתמש כבר שוחרר"
+        "unbanid_user_not_banned": "❌ המשתמש כבר שוחרר",
+        "available_commands": "לשמירת הודעה יש להגיב עליה עם הפקודה\n <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code>\n דוגמא: <code>/set שבת</code>",
+        "must_reply_to_set_messages": "חובה להגיב על הודעת טקסט או תמונה עם הפקודה\n <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code>\n דוגמא: <code>/set שבת</code>",
+        "text_or_photo_required": "ההודעה חייבת להכיל טקסט או תמונה",
+        "message_set": "ההודעה {} נשמרה בהצלחה",
+        "holiday_lock": "נעילת חג!\n{}\nהקבוצה תיפתח במוצאי החג",
+        "holiday_unlock": "צאת חג!\nהקבוצה פתוחה שוב לדיונים",
+        "shabbat_lock": "שבת שלום!\nהקבוצה תיפתח במוצאי שבת",
+        "shabbat_unlock": "צאת שבת!\nהקבוצה פתוחה שוב לדיונים",
+        "register_group": "הקבוצה {} נרשמה בהצלחה",
+        "unregister_group": "הקבוצה {} נרשמה בהצלחה"
     },
 
     "en": {
@@ -62,7 +72,7 @@
         "select_language": "🌐 <b>Select Language</b>\nPlease choose your preferred language for this bot.\n\n<i>בחר את השפה שלך למטה.</i>",
         "select_language_groups": "🌍 Please select a language for this group.\nSupported languages: {}",
         "language_set": "✅ <b>Your language has been set to:</b> {}",
-        "language_set_groups": "✅ <b>The group language has been set to:</b> {}",
+        "language_set_groups": "✅ <b>The group language has been set to:</b> English",
         "language_not_supported": "⚠️ The language {} is not supported.\nSupported languages: {}",
         "adminonly": "🚫 This command is available to admins only",
         "statistics": "📊 <b>Bot Statistics</b>\n👥 Total Users: {}\n✅ Active Users: {}\n💬 Total Chats: {}\n⚡ Active Chats: {}",
@@ -93,7 +103,17 @@
         "unbanid_user_not_found": "❌ No user found with the specified ID",
         "unbanid_invalid": "❌ Invalid ID. Please provide a valid user or chat ID",
         "unbanid_chat_not_banned": "❌ The chat is already banned",
-        "unbanid_user_not_banned": "❌ The user is already banned"
+        "unbanid_user_not_banned": "❌ The user is already banned",
+        "available_commands": "To save a message, reply to it with the command <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code> \n Example: <code>/set havdalah</code>",
+        "must_reply_to_set_messages": "You must reply to a text or photo message with the command <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code> \n Example: <code>/set havdalah</code>",
+        "text_or_photo_required": "The message must contain text or a photo",
+        "message_set": "✅ The message {} has been saved successfully",
+        "holiday_lock": "Holiday Lock!\n{}\nThe group will reopen after the holiday",
+        "holiday_unlock": "Holiday is over!\nThe group is now open for discussion",
+        "shabbat_lock": "Shabbat Shalom!\nThe group will reopen after Shabbat",
+        "shabbat_unlock": "Shavua Tov!\nThe group is now open for discussion",
+        "register_group": "The group {} has been registered successfully",
+        "unregister_group": "The group {} has been unregistered successfully"
     },
 
     "fr": {
@@ -110,7 +130,7 @@
         "select_language": "🌐 <b>Sélection de la langue</b>\nVeuillez choisir votre langue préférée pour utiliser le bot.\n\n<i>Select your preferred language below.</i>",
         "select_language_groups": "🌍 Veuillez sélectionner une langue pour ce groupe.\nLangues disponibles : {}",
         "language_set": "✅ <b>La langue sélectionnée est :</b> {}",
-        "language_set_groups": "✅ <b>La langue du groupe a été définie sur :</b> {}",
+        "language_set_groups": "✅ <b>La langue du groupe a été définie sur :</b> Français",
         "language_not_supported": "⚠️ La langue {} n’est pas prise en charge.\nLangues disponibles : {}",
         "adminonly": "🚫 Commande réservée aux administrateurs",
         "statistics": "📊 <b>Statistiques du bot</b>\n👥 Utilisateurs totaux : {}\n✅ Utilisateurs actifs : {}\n💬 Discussions totales : {}\n⚡ Discussions actives : {}",
@@ -142,6 +162,16 @@
         "unbanid_user_not_found": "❌ Aucun utilisateur trouvé avec l'ID spécifié",
         "unbanid_invalid": "❌ ID invalide. Veuillez fournir un ID d'utilisateur ou de chat valide",
         "unbanid_chat_not_banned": "❌ Le chat est déjà débanni",
-        "unbanid_user_not_banned": "❌ L'utilisateur est déjà débanni"
+        "unbanid_user_not_banned": "❌ L'utilisateur est déjà débanni",
+        "available_commands": "To save a message, reply to it with the command <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code>\n Example: <code>/set havdalah</code>",
+        "must_reply_to_set_messages": "You must reply to a text or photo message with the command <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code>\n Example: <code>/set havdalah</code>",
+        "text_or_photo_required": "The message must contain text or a photo",
+        "message_set": "✅ Le message {} a été enregistré avec succès",
+        "holiday_lock": "Fermeture pour fête !\n{}\nLe groupe rouvrira après la fête",
+        "holiday_unlock": "Fin de la fête !\nLe groupe est maintenant ouvert à la discussion",
+        "shabbat_lock": "Chabbat Chalom !\nLe groupe rouvrira après Chabbat",
+        "shabbat_unlock": "Chavoua Tov !\nLe groupe est maintenant ouvert à la discussion",
+        "register_group": "Le groupe {} a été enregistré avec succès",
+        "unregister_group": "Le groupe {} a été enregistré avec succès"
     }
 }

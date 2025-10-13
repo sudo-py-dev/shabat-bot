@@ -1,7 +1,10 @@
 import os
 from datetime import datetime, timedelta
+
+from pyrogram.raw.functions.bots import can_send_message
+from pyrogram.types import ChatPermissions
 from tools.logger import logger
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, func, ForeignKey, select, update, delete
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, func, ForeignKey, select, update, delete, JSON
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
@@ -47,6 +50,17 @@ class Chats(Base):
 
     # Relationship with AdminsPermissions
     admins_permissions = relationship("AdminsPermissions", back_populates="chat", cascade="all, delete-orphan")
+
+    # permissions for groups
+    permissions = Column(JSON, nullable=True)
+    register = Column(Boolean, default=False)
+    calendar_message = Column(String, nullable=True)
+    calendar_message_img = Column(String, nullable=True)
+    havdalah_message = Column(String, nullable=True)
+    havdalah_message_img = Column(String, nullable=True)
+    holiday_message = Column(String, nullable=True)
+    holiday_message_img = Column(String, nullable=True)
+    temp_message_id = Column(Integer, nullable=True)
 
     @classmethod
     async def create(cls, chat_id: int, chat_type: str, chat_title: str, is_active: bool = True) -> Dict[str, Any]:
@@ -106,6 +120,15 @@ class Chats(Base):
         async with async_session() as session:
             result = await session.execute(select(func.count()).select_from(select(cls).filter_by(**kwargs).subquery()))
             return result.scalar_one()
+    
+    @classmethod
+    async def get_permissions(cls, chat_id: int) -> ChatPermissions:
+        async with async_session() as session:
+            result = await session.execute(select(cls).filter_by(chat_id=chat_id))
+            chat = result.scalars().first()
+            if chat and isinstance(chat.permissions, dict):
+                return ChatPermissions(**chat.permissions)
+            return ChatPermissions(can_send_messages=True)
 
     @classmethod
     async def chat_status_change(cls, chat_id: int, chat_type: str, chat_title: str, is_active: bool, is_admin: bool) -> bool:
@@ -122,6 +145,13 @@ class Chats(Base):
                 chat.is_admin = is_admin
             await session.commit()
             return True
+    
+    @classmethod
+    async def get_by(cls, **kwargs) -> List[Dict[str, Any]]:
+        async with async_session() as session:
+            result = await session.execute(select(cls).filter_by(**kwargs))
+            chats = result.scalars().all()
+            return [{k: v for k, v in chat.__dict__.items() if not k.startswith('_')} for chat in chats]
     
     @classmethod
     async def get_all(cls) -> List[Dict[str, Any]]:
@@ -207,7 +237,7 @@ class AdminsPermissions(Base):
                 raise   
 
     @classmethod
-    async def is_admin(cls, chat_id: int, admin_id: int, permission: str) -> AccessPermission:
+    async def is_admin(cls, chat_id: int, admin_id: int, permission_required: str) -> AccessPermission:
         """
         Check if a user has a specific admin permission.
 
@@ -238,9 +268,9 @@ class AdminsPermissions(Base):
 
                 if admin is None:
                     return AccessPermission.NOT_ADMIN
-                if not hasattr(admin, permission):
+                if not hasattr(admin, permission_required):
                     return AccessPermission.DENY
-                return AccessPermission.ALLOW if getattr(admin, permission) else AccessPermission.DENY
+                return AccessPermission.ALLOW if getattr(admin, permission_required) else AccessPermission.DENY
             except Exception as e:
                 logger.error(f"Error in is_admin for chat {chat_id}, admin {admin_id}: {e}")
                 return AccessPermission.DENY
@@ -485,7 +515,6 @@ class BotSettings(Base):
             # Update cache
             cls._update_cache(settings)
             return settings
-
 
 async def create_tables():
     async with engine.begin() as conn:

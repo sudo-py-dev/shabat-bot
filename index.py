@@ -2,9 +2,11 @@ import os
 import asyncio
 from dotenv import load_dotenv
 from pyrogram import Client, idle
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from tools.logger import logger
 from database import create_tables, BotSettings
-from tools.tools import register_handlers
+from tools.schaduler import shabat_scheduler
+from tools.tools import IST, register_handlers
 from handlers import (
     commands_handlers,
     callback_query_handlers,
@@ -48,7 +50,9 @@ async def main():
     try:
         # Initialize database first
         await create_tables()
-
+        scheduler = AsyncIOScheduler()
+        scheduler.start()
+        scheduler.add_job(shabat_scheduler, trigger='cron', args=[app], hour=13, minute=38, timezone=IST)
         await app.start()
         me = await app.get_me()
         logger.info(f"Bot https://t.me/{me.username} is now running!")

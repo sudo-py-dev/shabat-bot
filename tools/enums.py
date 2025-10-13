@@ -1,6 +1,8 @@
 
 import os
 import json
+
+from pyrogram.types import ChatPermissions
 from tools.logger import logger
 from enum import Enum
 
@@ -99,3 +101,18 @@ class AccessPermission(Enum):
     """Chat is not found."""
     NEED_UPDATE = 5
     """Chat needs update."""
+
+
+full_lock_permissions = ChatPermissions(can_change_info=False,
+                                        can_send_audios=False,
+                                        can_send_messages=False,
+                                        can_send_polls=False,
+                                        can_send_photos=False,
+                                        can_send_videos=False,
+                                        can_add_web_page_previews=False,
+                                        can_invite_users=False,
+                                        can_send_media_messages=False,
+                                        can_send_voice_notes=False,
+                                        can_send_video_notes=False,
+                                        can_send_documents=False,
+                                        can_send_other_messages=False)

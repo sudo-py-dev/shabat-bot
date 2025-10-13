@@ -5,3 +5,6 @@ aiosqlite
 tgcrypto
 rich
 tzdata
+hebcal-api
+apscheduler
+pytz

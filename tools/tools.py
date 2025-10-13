@@ -9,9 +9,15 @@ from tools.enums import Messages, PrivilegesMessages
 from functools import wraps
 from tools.logger import logger
 from typing import Union
+from datetime import datetime
 import os
+from hebcal_api import Calendar
 from tools.inline_keyboards import select_language_buttons
 from pyrogram.filters import create, Filter
+from pytz import timezone
+
+
+IST = timezone('Asia/Jerusalem')
 
 def is_valid_chat_id(chat_id) -> bool:
     return bool(re.match(r"^-\d{5,32}$", str(chat_id)))
@@ -49,9 +55,9 @@ async def is_admin(
 
     try:
         # First check the database
-        admin_status = AdminsPermissions.is_admin(chat_id=chat_id,
+        admin_status = await AdminsPermissions.is_admin(chat_id=chat_id,
                                                   admin_id=user_id,
-                                                  permission=permission_require)
+                                                  permission_required=permission_require)
 
         # If we need to refresh the admin list
         if admin_status == AccessPermission.NEED_UPDATE:
@@ -65,11 +71,11 @@ async def is_admin(
                     )
                 ]
                 # Update database
-                AdminsPermissions.create(chat_id=chat_id, admin_list=admin_list)
+                await AdminsPermissions.create(chat_id=chat_id, admin_list=admin_list)
                 # Check again after update
-                admin_status = AdminsPermissions.is_admin(chat_id=chat_id,
-                                                          user_id=user_id,
-                                                          permission_require=permission_require)
+                admin_status = await AdminsPermissions.is_admin(chat_id=chat_id,
+                                                          admin_id=user_id,
+                                                          permission_required=permission_require)
                 if admin_status in [AccessPermission.ALLOW, AccessPermission.DENY, AccessPermission.NOT_ADMIN]:
                     return admin_status
 
@@ -250,3 +256,36 @@ def wait_input_filter(wait_input: str) -> Filter:
             return user.get("wait_input") == wait_input
         return False
     return create(func=func, name=f"WaitInput_{wait_input}")
+
+
+async def status_lock():
+    calendar = Calendar()
+    now = datetime.now(IST).date()
+    events = await calendar.get_events_async(start=now,
+                                             end=now,
+                                             geonameid=7498240,
+                                             major_holidays=True,
+                                             special_shabbatot=True,
+                                             candle_lighting_minutes_before_sunset=os.getenv("BEFORE_SHABAT", 40))
+    for event in events.items:
+        holiday = None
+        status = None
+        time = None
+        yom_tov = None
+
+        if event.candle:
+            time = event.candle.time
+            status = True
+        elif event.holiday:
+            if event.holiday.yomtov:
+                yom_tov = True
+            holiday = event.title
+        elif event.havdalah:
+            time = event.havdalah.time
+            status = False
+    
+    if holiday and now.weekday() in (4, 5):
+        return {"status": status, "time": time, "holiday": None}
+    elif yom_tov and status:
+        return {"status": None, "time": None, "holiday": None}
+    return {"status": status, "time": time, "holiday": holiday}

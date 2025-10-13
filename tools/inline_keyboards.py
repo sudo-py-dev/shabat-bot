@@ -66,3 +66,28 @@ def bot_settings_buttons(bot_settings: BotSettings, language: str):
     ]
     
     return InlineKeyboardMarkup(buttons)
+
+
+def join_button(username: str) -> InlineKeyboardMarkup:
+    """
+    Create inline buttons:
+    1. Invite bot to a group with admin rights
+    2. Link to source code repository
+    """
+    username = username.lstrip("@")
+
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="➕ הוסף אותי לקבוצה",
+                url=f"https://t.me/{username}?startgroup=start&admin=delete_messages+restrict_members"
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="💻 קוד המקור",
+                url="https://github.com/sudo-py-dev/shabat-bot"
+            )
+        ]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=buttons)

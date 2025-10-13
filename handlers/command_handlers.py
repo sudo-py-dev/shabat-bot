@@ -37,19 +37,70 @@ async def change_language_handler(_, message: Message, language: str):
             await message.reply(error_msg)
             return
 
-        Chats.update(chat_id=message.chat.id, language=new_lang)
-        messages = Messages(language=new_lang)
-        await message.reply(messages.language_set_groups.format(messages.language))
+        await Chats.update(chat_id=message.chat.id, language=new_lang)
+        await message.reply(Messages(language=new_lang).language_set_groups)
     else:
         await message.reply(Messages(language=language).select_language, reply_markup=select_language_buttons())
 
 
-# Add more commands handlers here
+@is_admin_message()
+@with_language
+async def set_messages_handler(_, message: Message, language: str):
+    messages = Messages(language=language)
+    if not message.reply_to_message:
+        await message.reply(messages.must_reply_to_set_messages)
+        return
+    elif len(message.command) != 2:
+        await message.reply(messages.available_commands)
+        return
+    
+    reply_message = message.reply_to_message
+    photo_file_id = None
+    text = None
+    if reply_message.photo:
+        photo_file_id = reply_message.photo.file_id
+        text = getattr(reply_message.caption, "html", reply_message.caption)
+    elif reply_message.text:
+        text = getattr(reply_message.text, "html", reply_message.text)
+    else:
+        await message.reply(messages.text_or_photo_required)
+        return
+    
+    action = message.command[1]
+    if action in ("calendar", "שבת"):
+        await Chats.update(chat_id=message.chat.id, calendar_message=text, calendar_message_img=photo_file_id)
+        await message.reply(messages.message_set.format(action))
+    elif action in ("havdalah", "הבדלה"):
+        await Chats.update(chat_id=message.chat.id, havdalah_message=text, havdalah_message_img=photo_file_id)
+        await message.reply(messages.message_set.format(action))
+    elif action in ("holiday", "חג"):
+        await Chats.update(chat_id=message.chat.id, holiday_message=text, holiday_message_img=photo_file_id)
+        await message.reply(messages.message_set.format(action))
+    else:
+        await message.reply(messages.available_commands)
+
+
+@is_admin_message()
+@with_language
+async def register_group_handler(_, message: Message, language: str):
+    chat_id = message.chat.id
+    await Chats.update(chat_id=chat_id, register=True)
+    await message.reply(Messages(language=language).register_group.format(chat_id))
+
+
+@is_admin_message()
+@with_language
+async def unregister_group_handler(_, message: Message, language: str):
+    chat_id = message.chat.id
+    await Chats.update(chat_id=chat_id, register=False)
+    await message.reply(Messages(language=language).unregister_group.format(chat_id))
 
 
 commands_handlers = [
     MessageHandler(start_handler, filters.command("start") & filters.private),
     MessageHandler(help_handler, filters.command("help") & filters.private),
-    MessageHandler(change_language_handler, filters.command("lang") & (filters.private | filters.group))
-    # Add the commands functions with the filters here
+    MessageHandler(change_language_handler, filters.command("lang") & (filters.private | filters.group)),
+    MessageHandler(set_messages_handler, filters.command("set") & filters.group),
+    MessageHandler(register_group_handler, filters.command("register") & filters.group),
+    MessageHandler(unregister_group_handler, filters.command("unregister") & filters.group),
 ]
