@@ -48,7 +48,6 @@
 |--------|--------|------|
 | `BOT_TOKEN` | טוקן הבוט שלך מ-[@BotFather](https://t.me/botfather) | ✅ |
 | `BOT_OWNER_ID` | מזהה המשתמש שלך בטלגרם | ✅ |
-| `ADMIN_IDS` | רשימת מזההי משתמשים למנהלים מופרדות בפסיק | ✅ |
 | `DATABASE_URL` | כתובת חיבור למסד הנתונים | ✅ |
 | `BEFORE_SHABAT` | דקות לפני כניסת השבת לשליחת התראות (ברירת מחדל: 40) | ❌ |
 | `SKIP_UPDATES` | דילוג על עדכונים בהפעלה (true/false) | ❌ |
@@ -74,9 +73,9 @@
 אנחנו שמחים לקבל תרומות! אתם מוזמנים לשלוח בקשת משיכה (Pull Request).
 
 1. בצע פורק (Fork) למאגר
-2. צור ענף לתכונה החדשה שלך (`git checkout -b feature/תכונה-מדהימה`)
-3. שמור את השינויים שלך (`git commit -m 'הוספת תכונה מדהימה'`)
-4. דחוף את הענף (`git push origin feature/תכונה-מדהימה`)
+2. צור ענף לתכונה החדשה שלך (`git checkout -b feature/cool-feature`)
+3. שמור את השינויים שלך (`git commit -m 'Add cool feature'`)
+4. דחוף את הענף (`git push origin feature/cool-feature`)
 5. פתח בקשת משיכה
 
 ## רישיון 📄
