@@ -7,7 +7,10 @@
         "commands": {
             "start": "הפעלת הבוט",
             "help": "תפריט עזרה",
-            "lang": "שינוי שפה"
+            "lang": "שינוי שפה",
+            "register": "רישום קבוצה",
+            "unregister": "ביטול רישום קבוצה",
+            "set": "הגדר הודעות - <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code>"
         },
         "help": "🆘 <b>תפריט עזרה</b>\n{}",
         "select_language": "🌐 <b>בחירת שפה</b>\nבחר את השפה המועדפת עליך לשימוש בבוט.\n\n<i>Select your preferred language below.</i>",
@@ -66,7 +69,10 @@
         "commands": {
             "start": "Start the bot",
             "help": "Show help menu",
-            "lang": "Change language"
+            "lang": "Change language",
+            "register": "Register group",
+            "unregister": "Unregister group",
+            "set": "Set messages - <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code>"
         },
         "help": "🆘 <b>Help Menu</b>\n{}",
         "select_language": "🌐 <b>Select Language</b>\nPlease choose your preferred language for this bot.\n\n<i>בחר את השפה שלך למטה.</i>",
@@ -124,7 +130,10 @@
         "commands": {
             "start": "Démarrer le bot",
             "help": "Afficher le menu d’aide",
-            "lang": "Changer la langue"
+            "lang": "Changer la langue",
+            "register": "S'inscrire au groupe",
+            "unregister": "Se désinscrire du groupe",
+            "set": "Définir les messages - <code>/set (calendar/שבת/havdalah/הבדלה/holiday/חג)</code>"
         },
         "help": "🆘 <b>Menu d’aide</b>\n{}",
         "select_language": "🌐 <b>Sélection de la langue</b>\nVeuillez choisir votre langue préférée pour utiliser le bot.\n\n<i>Select your preferred language below.</i>",
