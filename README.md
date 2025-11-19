@@ -85,7 +85,7 @@
 ## תודות 🙏
 
 - [pyrotgfork](https://telegramplayground.github.io/pyrogram/) - ספריית Python ל-Telegram MTProto API
-- [hebcal-api](https://github.com/evanwheeler/hebcal-api) - API ללוח השנה היהודי
+- [hebcal-api](https://github.com/sudo-py-dev/hebcal-api) - API ללוח השנה היהודי
 - [pytz](https://pypi.org/project/pytz/) - הגדרות אזורי זמן עבור פייתון
 
 ---
